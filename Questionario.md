@@ -1,44 +1,62 @@
-# Questionário Sistemas Embarcados I
+# QUESTIONARIO SISTEMAS EMBARCADOS - BRUNO MENDES DA SILVA 11921EAU016
 
-## 1. Explique brevemente o que é compilação cruzada (***cross-compiling***) e para que ela serve.
 
-## 2. O que é um código de inicialização ou ***startup*** e qual sua finalidade?
 
-## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
+## 1. Compilação Cruzada
+A compilação cruzada, ou **cross-compiling**, refere-se ao processo de compilar o código-fonte em um sistema de desenvolvimento diferente daquele em que será executado. Isso é útil quando há discrepâncias na arquitetura de hardware ou no sistema operacional entre os ambientes de compilação e execução. O objetivo principal é possibilitar o desenvolvimento de software para plataformas incompatíveis com o sistema de desenvolvimento original. Essa prática é especialmente benéfica em sistemas embarcados, onde os recursos podem ser limitados.
 
-#### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
+## 2. Código de Inicialização ou Startup
+O código de inicialização, também conhecido como código de boot, consiste em um conjunto de instruções que executa imediatamente após a inicialização de um sistema embarcado. Sua função principal é configurar o ambiente necessário para carregar e executar outras partes do software. Isso inclui a inicialização e configuração do hardware, definição de pilha e heap, configuração do ambiente de execução e carregamento do código principal. Garante uma inicialização ordenada e prepara o sistema para a execução efetiva do software.
 
-#### (b) Descreva brevemente o processo realizado pelo utilitário **make** para compilar um programa.
+## 3. Utilitário Make e Makefile
+### a) Makefile
+O **Makefile** é uma ferramenta de automação de compilação que coordena componentes de software para criar executáveis finais ou artefatos de construção. Simplifica e automatiza o processo de compilação, gerenciando dependências entre os arquivos-fonte.
 
-#### (c) Qual é a sintaxe utilizada para criar um novo **target**?
+### b) Processo do Make
+O processo do **make** envolve leitura do Makefile, análise de dependências, execução dos comandos de compilação, vinculação dos objetos compilados e conclusão da compilação. A sintaxe para criar um novo target envolve especificar o nome do alvo, suas dependências e os comandos associados.
 
-#### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
+### c) Sintaxe para Novo Target
+A sintaxe para criar um novo target é especificar `nome_do_alvo: dependências comandos`.
 
-#### (e) O que são as regras do **Makefile**, qual a diferença entre regras implícitas e explícitas?
+### d) Dependências
+As dependências são listadas para que o **make** determine se o alvo precisa ser reconstruído com base na data de modificação das dependências em relação ao próprio alvo. Isso garante uma compilação eficiente e consistente.
 
-## 4. Sobre a arquitetura **ARM Cortex-M** responda:
+### e) Regras do Makefile
+Em um **Makefile**, as regras explícitas têm comandos diretos, enquanto as implícitas são padrões integrados ao **make** para compilar tipos específicos de arquivos.
 
-### (a) Explique o conjunto de instruções ***Thumb*** e suas principais vantagens na arquitetura ARM. Como o conjunto de instruções ***Thumb*** opera em conjunto com o conjunto de instruções ARM?
+## 4. Arquitetura ARM Cortex-M
+### a) Conjunto de Instruções Thumb
+O conjunto de instruções **Thumb** é uma extensão otimizada da arquitetura ARM, oferecendo instruções mais condensadas para economizar espaço de memória. A arquitetura ARM Cortex-M é compatível com Thumb e ARM, permitindo escolher a opção adequada.
 
-### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Register***.
+### b) Diferenças entre Load/Store e Register/Register
+As arquiteturas Load/Store e Register/Register diferem na interação com a memória. Load/Store usa instruções específicas para acesso à memória, enquanto Register/Register permite operações diretas entre registradores, sem acesso à memória.
 
-### (c) Os processadores **ARM Cortex-M** oferecem diversos recursos que podem ser explorados por sistemas baseados em **RTOS** (***Real Time Operating Systems***). Por exemplo, a separação da execução do código em níveis de acesso e diferentes modos de operação. Explique detalhadamente como funciona os níveis de acesso de execução de código e os modos de operação nos processadores **ARM Cortex-M**.
+### c) Níveis de Acesso e Modos de Operação
+Os processadores ARM Cortex-M têm dois níveis de acesso (Thread Mode e Handler Mode) e modos de operação (User Mode e modos privilegiados) para facilitar o desenvolvimento de sistemas RTOS mais robustos.
 
-### (d) Explique como os processadores ARM tratam as exceções e as interrupções. Quais são os diferentes tipos de exceção e como elas são priorizadas? Descreva a estratégia de **group priority** e **sub-priority** presente nesse processo.
+### d) Tratamento de Exceções e Interrupções
+O tratamento de exceções e interrupções envolve diversos tipos de exceções e uma tabela de vetores para mapear endereços de tratadores. O NVIC prioriza exceções e utiliza group priority e sub-priority para determinar a sequência de atendimento.
 
-### (e) Qual a diferença entre os registradores **CPSR** (***Current Program Status Register***) e **SPSR** (***Saved Program Status Register***)?
+### e) Diferença entre Registradores CPSR e SPSR
+O CPSR mantém o estado atual do processador, enquanto o SPSR temporariamente armazena o estado durante exceções. Esses registros são cruciais para uma transição suave entre o código principal e o tratamento de exceções.
 
-### (f) Qual a finalidade do **LR** (***Link Register***)?
+### f) Finalidade do Link Register (LR)
+O LR preserva o endereço de retorno durante chamadas de sub-rotina, facilitando a continuidade do fluxo de execução após a conclusão da sub-rotina.
 
-### (g) Qual o propósito do Program Status Register (PSR) nos processadores ARM?
+### g) Finalidade do Program Status Register (PSR)
+O PSR armazena informações sobre o estado do processador, como flags de condição, modo de operação e controle de interrupções.
 
-### (h) O que é a tabela de vetores de interrupção?
+### h) Tabela de Vetores de Interrupção
+A tabela de vetores de interrupção mapeia endereços para tratadores de interrupção, permitindo direcionar corretamente as interrupções para o código apropriado.
 
-### (i) Qual a finalidade do NVIC (**Nested Vectored Interrupt Controller**) nos microcontroladores ARM e como ele pode ser utilizado em aplicações de tempo real?
+### i) Nested Vectored Interrupt Controller (NVIC)
+O NVIC é essencial para sistemas de tempo real, proporcionando aninhamento de interrupções para uma resposta rápida a eventos críticos.
 
-### (j) Em modo de execução normal, o Cortex-M pode fazer uma chamada de função usando a instrução **BL**, que muda o **PC** para o endereço de destino e salva o ponto de execução atual no registador **LR**. Ao final da função, é possível recuperar esse contexto usando uma instrução **BX LR**, por exemplo, que atualiza o **PC** para o ponto anterior. No entanto, quando acontece uma interrupção, o **LR** é preenchido com um valor completamente  diferente,  chamado  de  **EXC_RETURN**.  Explique  o  funcionamento  desse  mecanismo  e especifique como o **Cortex-M** consegue fazer o retorno da interrupção. 
+### j) Retorno de Interrupção
+Durante uma interrupção, o valor EXC_RETURN no LR contém informações para um retorno adequado. A instrução BX LR interpreta esse valor para executar ações como ajuste de pilha e mudança de modo de execução.
 
-### (k) Qual  a  diferença  no  salvamento  de  contexto,  durante  a  chegada  de  uma  interrupção,  entre  os processadores Cortex-M3 e Cortex M4F (com ponto flutuante)? Descreva em termos de tempo e também de uso da pilha. Explique também o que é ***lazy stack*** e como ele é configurado. 
+### k) Salvamento de Contexto e Lazy Stacking
+A diferença no salvamento de contexto entre Cortex-M3 e Cortex-M4F está no suporte a ponto flutuante. O Cortex-M4F salva e restaura registradores de ponto flutuante, aumentando o tempo de resposta e o uso da pilha. O "lazy stacking" adia o salvamento dos registradores até ser necessário, otimizando o desempenho.
 
 
 ## Referências
